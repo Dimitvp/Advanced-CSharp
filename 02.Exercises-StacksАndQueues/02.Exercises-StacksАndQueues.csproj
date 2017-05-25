@@ -54,7 +54,7 @@
     <Compile Include="08.RecursiveFibonacci.cs" />
     <Compile Include="09.StackFibonacci.cs" />
     <Compile Include="10.SimpleTextEditor.cs" />
-    <Compile Include="template - Copy.cs" />
+    <Compile Include="11.PoisonousPlants.cs" />
     <Compile Include="template.cs" />
   </ItemGroup>
   <ItemGroup>
