@@ -44,8 +44,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="02.SoftUniParty.cs" />
-    <Compile Include="template - Copy %283%29.cs" />
-    <Compile Include="template - Copy %284%29.cs" />
+    <Compile Include="03.CountSameValuesInArray.cs" />
+    <Compile Include="04.AcademyGraduation.cs" />
     <Compile Include="01.ParkingLot.cs" />
     <Compile Include="template.cs" />
   </ItemGroup>
