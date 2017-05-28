@@ -8,7 +8,7 @@ namespace SuperSnake
     internal class Program
     {
 
-        static void Main(string[] args)
+        static void Main()
         {
             Game();
         }
@@ -24,38 +24,88 @@ namespace SuperSnake
         {
             ConsoleKeyInfo keyInfo;
 
-            while ((keyInfo = Console.ReadKey(true)).Key != ConsoleKey.Escape)
+            while (true)
             {
+                keyInfo = Console.ReadKey(true);
+                System.Threading.Thread.Sleep(10);
+
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        obj.Move(0, -1);
-                        DrawProtagonist(obj);
-                        ClearBackground(obj);
-
+                        //System.Threading.Thread.Sleep(200);
+                        MoveUp(obj);
                         break;
 
                     case ConsoleKey.RightArrow:
-                        obj.Move(1, 0);
-                        DrawProtagonist(obj);
-                        ClearBackground(obj);
-
+                        MoveRight(obj);
                         break;
 
                     case ConsoleKey.DownArrow:
-                        obj.Move(0, 1);
-                        DrawProtagonist(obj);
-                        ClearBackground(obj);
-
+                        MoveDown(obj);
                         break;
 
                     case ConsoleKey.LeftArrow:
-                        obj.Move(-1, 0);
-                        DrawProtagonist(obj);
-                        ClearBackground(obj);
+                        MoveLeft(obj);
+                        break;
+
+                    case ConsoleKey.Escape:
+                        Console.WriteLine("Pause");
                         break;
                 }
             }
+
+            //while ((keyInfo = Console.ReadKey(true)).Key != ConsoleKey.Escape)
+            //{
+            //    switch (keyInfo.Key)
+            //    {
+            //        case ConsoleKey.UpArrow:
+            //            //System.Threading.Thread.Sleep(200);
+            //            MoveUp(obj);
+            //            break;
+
+            //        case ConsoleKey.RightArrow:
+            //            MoveRight(obj);
+
+            //            break;
+
+            //        case ConsoleKey.DownArrow:
+            //            MoveDown(obj);
+
+            //            break;
+
+            //        case ConsoleKey.LeftArrow:
+            //            MoveLeft(obj);
+            //            break;
+            //    }
+            //}
+        }
+
+        private static void MoveLeft(Protagonist obj)
+        {
+            obj.Move(-1, 0);
+            DrawProtagonist(obj);
+            ClearBackground(obj);
+        }
+
+        private static void MoveDown(Protagonist obj)
+        {
+            obj.Move(0, 1);
+            DrawProtagonist(obj);
+            ClearBackground(obj);
+        }
+
+        private static void MoveRight(Protagonist obj)
+        {
+            obj.Move(1, 0);
+            DrawProtagonist(obj);
+            ClearBackground(obj);
+        }
+
+        private static void MoveUp(Protagonist obj)
+        {
+            obj.Move(0, -1);
+            DrawProtagonist(obj);
+            ClearBackground(obj);
         }
 
         private static void DrawProtagonist(Protagonist obj)
@@ -64,7 +114,7 @@ namespace SuperSnake
             Console.SetCursorPosition(obj.X, obj.Y);
             if (obj.Y == 0)
             {
-                Console.Write("O");
+                Console.Write("..");
             }
             else
             {
@@ -83,6 +133,7 @@ namespace SuperSnake
 
         private static void InitializeGame()
         {
+            Console.CursorVisible = false;
             Console.BufferHeight = GameConst.Height;
             Console.BufferWidth = GameConst.Width;
             Console.SetWindowSize(GameConst.Width, GameConst.Height);

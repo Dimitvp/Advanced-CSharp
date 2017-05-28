@@ -45,7 +45,6 @@
     <Compile Include="GameConst.cs" />
     <Compile Include="Protagonist.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
