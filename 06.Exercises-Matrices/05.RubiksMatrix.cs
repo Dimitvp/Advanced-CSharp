@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace _06.Exercises_Matrices
 {
@@ -33,20 +30,24 @@ namespace _06.Exercises_Matrices
                 var target = int.Parse(commandData[0]);
                 var command = commandData[1];
                 var shifts = int.Parse(commandData[2]);
-                var buffer = 0;
+                var buffer = 9999999;
 
 
                 if (command == "down")
                 {
                     shifts = shifts % rows;
-                    
                     // shiffle down
-                    for (int r = 0; r < rows-1; r++)
+                    for (int j = 0; j < shifts; j++)
                     {
-                        buffer = matrix[r+1][target];
-                        matrix[r + 1][target] = matrix[r][target];
+                        for (int r = 0; r < rows; r++)
+                        {
+                            var cur = matrix[r][target];
+                            matrix[r][target] = buffer;
+                            buffer = cur;
+                        }
+                        matrix[0][target] = buffer;
                     }
-                    matrix[0][target] = buffer;
+
 
                 }
 
@@ -54,22 +55,83 @@ namespace _06.Exercises_Matrices
                 {
                     shifts = shifts % rows;
                     // shiffle up
+                    for (int j = 0; j < shifts; j++)
+                    {
+                        buffer = matrix[0][target];
+                        for (int r = 0; r < rows - 1; r++)
+                        {
+                            matrix[r][target] = matrix[r + 1][target];
+                        }
+                        matrix[matrix.Length - 1][target] = buffer;
+                    }
+
                 }
 
                 if (command == "left")
                 {
+                    shifts = shifts % cols;
                     // shiffle left
+
+                    for (int j = 0; j < shifts; j++)
+                    {
+                        buffer = matrix[target][0];
+                        for (int c = 0; c < cols - 1; c++)
+                        {
+                            matrix[target][c] = matrix[target][c + 1];
+                        }
+                        matrix[target][matrix[target].Length - 1] = buffer;
+                    }
                 }
 
                 if (command == "right")
                 {
+                    shifts = shifts % cols;
                     // shiffle right
+                    for (int j = 0; j < shifts; j++)
+                    {
+                        buffer = matrix[target][0];
+                        for (int c = 1; c < cols; c++)
+                        {
+                            var curr = matrix[target][c];
+                            matrix[target][c] = buffer;
+                            buffer = curr;
+                        }
+                        matrix[target][0] = buffer;
+                    }
                 }
             }
 
+            counter = 1;
+            for (int r = 0; r < rows; r++)
+            {
+                for (int c = 0; c < cols; c++)
+                {
+                    if (matrix[r][c] != counter)
+                    {
 
+                        for (int rr = 0; rr < rows; rr++)
+                        {
+                            for (int cc = 0; cc < cols; cc++)
+                            {
+                                if (matrix[rr][cc] == counter)
+                                {
+                                    var wrong = matrix[r][c];
+                                    var correct = matrix[rr][cc];
+                                    matrix[r][c] = correct;
+                                    matrix[rr][cc] = wrong;
+                                    Console.WriteLine($"Swap ({r}, {c}) with ({rr}, {cc})");
 
-
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No swap required");
+                    }
+                    counter++;
+                }
+            }
         }
     }
 }
