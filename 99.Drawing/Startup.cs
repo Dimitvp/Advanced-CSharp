@@ -1,83 +1,97 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
+using System.Threading;
 using _99.Drawing;
 
 namespace SuperSnake
 {
+    public enum Direction
+    {
+        Up,
+        Down,
+        Left,
+        Right
+    }
 
     internal class Program
     {
 
-        static void Main()
-        {
-            Game();
-        }
+        //static void Main()
+        //{
+        //    Game();
+        //}
 
         private static void Game()
         {
-            var obj = new Protagonist();
+            Protagonist protagonist = new Protagonist();
             InitializeGame();
-            NavigateProtagonist(obj);
+            NavigateProtagonist(protagonist);
         }
 
         private static void NavigateProtagonist(Protagonist obj)
         {
-            ConsoleKeyInfo keyInfo;
 
-            while (true)
+
+            ConsoleKeyInfo cki = new ConsoleKeyInfo();
+            do
             {
-                keyInfo = Console.ReadKey(true);
-                System.Threading.Thread.Sleep(10);
 
-                switch (keyInfo.Key)
+                while (Console.KeyAvailable == false)
                 {
-                    case ConsoleKey.UpArrow:
-                        //System.Threading.Thread.Sleep(200);
-                        MoveUp(obj);
-                        break;
+                    Thread.Sleep(GameParameter.GameSpeed);
+                    if (cki.Key == ConsoleKey.UpArrow)
+                    {
+                        Move(Direction.Up, obj);
 
-                    case ConsoleKey.RightArrow:
-                        MoveRight(obj);
-                        break;
+                    }
+                    if (cki.Key == ConsoleKey.DownArrow)
+                    {
+                        Move(Direction.Down, obj);
 
-                    case ConsoleKey.DownArrow:
-                        MoveDown(obj);
-                        break;
+                    }
+                    if (cki.Key == ConsoleKey.LeftArrow)
+                    {
+                        Move(Direction.Left, obj);
 
-                    case ConsoleKey.LeftArrow:
-                        MoveLeft(obj);
-                        break;
+                    }
 
-                    case ConsoleKey.Escape:
-                        Console.WriteLine("Pause");
-                        break;
+                    if (cki.Key == ConsoleKey.RightArrow)
+                    {
+                        Move(Direction.Right, obj);
+
+                    }
+                    if (cki.Key == ConsoleKey.Spacebar && !GameParameter.IsPaused)
+                    {
+                        Console.WriteLine("Press UP,DOWN,LEFT or RIGHT to continue");
+                        GameParameter.IsPaused = true;
+                        cki = Console.ReadKey();
+
+                    }
                 }
+
+                cki = Console.ReadKey(true);
+
+            } while (cki.Key != ConsoleKey.Escape);
+        }
+
+        private static void Move(Direction direction, Protagonist protagonist)
+        {
+            if (direction == Direction.Up)
+            {
+                MoveUp(protagonist);
             }
-
-            //while ((keyInfo = Console.ReadKey(true)).Key != ConsoleKey.Escape)
-            //{
-            //    switch (keyInfo.Key)
-            //    {
-            //        case ConsoleKey.UpArrow:
-            //            //System.Threading.Thread.Sleep(200);
-            //            MoveUp(obj);
-            //            break;
-
-            //        case ConsoleKey.RightArrow:
-            //            MoveRight(obj);
-
-            //            break;
-
-            //        case ConsoleKey.DownArrow:
-            //            MoveDown(obj);
-
-            //            break;
-
-            //        case ConsoleKey.LeftArrow:
-            //            MoveLeft(obj);
-            //            break;
-            //    }
-            //}
+            if (direction == Direction.Down)
+            {
+                MoveDown(protagonist);
+            }
+            if (direction == Direction.Left)
+            {
+                MoveLeft(protagonist);
+            }
+            if (direction == Direction.Right)
+            {
+                MoveRight(protagonist);
+            }
+            GameParameter.IsPaused = false;
         }
 
         private static void MoveLeft(Protagonist obj)
@@ -110,9 +124,9 @@ namespace SuperSnake
 
         private static void DrawProtagonist(Protagonist obj)
         {
-            Console.BackgroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = GameParameter.ProtagonistColor;
             Console.SetCursorPosition(obj.X, obj.Y);
-            if (obj.Y == 0)
+            if (obj.Y == 0 || obj.X == 0)
             {
                 Console.Write("..");
             }
@@ -120,28 +134,50 @@ namespace SuperSnake
             {
                 Console.Write("  ");
             }
+            
+        }
 
+        private static void DrawPlayground(Protagonist obj)
+        {
+            for (int i = 0; i < GameParameter.WidthConst; i += 20)
+            {
+                Console.SetCursorPosition(i, 0);
+                Console.Write("  ");
+                Console.SetCursorPosition(i, GameParameter.HeightConst - 1);
+                Console.Write("  ");
+            }
+
+            for (int i = 0; i < GameParameter.HeightConst; i += 10)
+            {
+                Console.SetCursorPosition(0, i);
+                Console.Write("  ");
+                Console.SetCursorPosition(GameParameter.WidthConst - 2, i);
+                Console.Write("  ");
+            }
+            Console.SetCursorPosition(obj.X, obj.Y);
         }
 
         private static void ClearBackground(Protagonist obj)
         {
-            Console.BackgroundColor = ConsoleColor.Red;
+            Console.BackgroundColor = GameParameter.BackgroundColor;
             Console.Clear();
             DrawProtagonist(obj);
+            DrawPlayground(obj);
 
         }
 
         private static void InitializeGame()
         {
             Console.CursorVisible = false;
-            Console.BufferHeight = GameConst.Height;
-            Console.BufferWidth = GameConst.Width;
-            Console.SetWindowSize(GameConst.Width, GameConst.Height);
-            Console.BackgroundColor = ConsoleColor.Red;
+            Console.BufferHeight = GameParameter.HeightConst;
+            Console.BufferWidth = GameParameter.WidthConst;
+            Console.SetWindowSize(GameParameter.WidthConst, GameParameter.HeightConst);
+            Console.BackgroundColor = GameParameter.BackgroundColor;
             Console.Clear();
-            Console.BackgroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = GameParameter.ProtagonistColor;
             Console.SetCursorPosition(0, 0);
             Console.Write("  ");
+
         }
     }
 }

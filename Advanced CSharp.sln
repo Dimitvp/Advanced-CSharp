@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "99.Drawing", "99.Drawing\99
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.Exercises-SetsAndDictionaries", "04.Exercises-SetsAndDictionaries\04.Exercises-SetsAndDictionaries.csproj", "{B34C7F48-E781-49FD-9EDA-045B630ED647}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.Lab-MultidimensionalArrays", "05.Lab-MultidimensionalArrays\05.Lab-MultidimensionalArrays.csproj", "{CFCF1649-72E0-466B-8400-B5D9A808A6CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B34C7F48-E781-49FD-9EDA-045B630ED647}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B34C7F48-E781-49FD-9EDA-045B630ED647}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B34C7F48-E781-49FD-9EDA-045B630ED647}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFCF1649-72E0-466B-8400-B5D9A808A6CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFCF1649-72E0-466B-8400-B5D9A808A6CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFCF1649-72E0-466B-8400-B5D9A808A6CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFCF1649-72E0-466B-8400-B5D9A808A6CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

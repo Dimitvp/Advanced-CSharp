@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F796D6CE-42F9-4C46-BAB0-AD82DE8C7F01}</ProjectGuid>
+    <ProjectGuid>{CFCF1649-72E0-466B-8400-B5D9A808A6CC}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>_99.Drawing</RootNamespace>
-    <AssemblyName>99.Drawing</AssemblyName>
+    <RootNamespace>_05.Lab_MultidimensionalArrays</RootNamespace>
+    <AssemblyName>05.Lab-MultidimensionalArrays</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,9 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameParameter.cs" />
-    <Compile Include="Protagonist.cs" />
-    <Compile Include="Startup.cs" />
+    <Compile Include="01.SumMatrixElements.cs" />
+    <Compile Include="02.SquareWithMaximumSum.cs" />
+    <Compile Include="03.GroupNumbers.cs" />
+    <Compile Include="04.PascalTriangle.cs" />
+    <Compile Include="template.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
